@@ -1,6 +1,8 @@
 import datetime as dt
 import numpy as np
 import pandas as pd
+import os
+import sys
 from collections import deque
 
 # Historic temperatures from http://www.intellicast.com/Local/History.aspx?location=USNY0996
@@ -13,7 +15,7 @@ hist_avg_low_temp = {
 
 class CitibikeForecaster:
   def __init__(self):
-    d = pd.read_csv("./metadata.txt")
+    d = pd.read_csv(os.path.join(os.path.dirname(__file__), "metadata.txt"))
     d = d[d.n_obs > 500000] # Remove the stations with too little data
     d = d.filter(regex="station_name|type|p_*")
 
